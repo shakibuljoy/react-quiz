@@ -7,6 +7,8 @@ import Login from "./components/pages/Login";
 import Quiz from "./components/pages/Quiz";
 import Results from "./components/pages/Results";
 import Signup from "./components/pages/Signup";
+import ProtectedRoute from "./utils/ProtectedRoute";
+import PublicRoute from "./utils/PublicRoute";
 
 const router = createBrowserRouter([
   {
@@ -19,19 +21,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/signup",
-        element: <Signup />,
+        element: <PublicRoute><Signup /></PublicRoute>,
       },
       {
         path: "/login",
-        element: <Login />,
+        element: <PublicRoute><Login /></PublicRoute>,
       },
       {
         path: "/quiz/:id",
-        element: <Quiz />,
+        element: <ProtectedRoute><Quiz /></ProtectedRoute>,
       },
       {
         path: "/results/:id",
-        element: <Results />,
+        element: <ProtectedRoute><Results /></ProtectedRoute>,
       },
     ],
   },
