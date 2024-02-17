@@ -7,6 +7,7 @@ import { initializeApp } from "firebase/app";
 const firebaseConfig = {
   apiKey: "AIzaSyAEF7pJIk-WPwjMtpEVwi1SAuDuU4XFoP0",
   authDomain: "react-shakib.firebaseapp.com",
+  databaseURL: "https://react-shakib-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "react-shakib",
   storageBucket: "react-shakib.appspot.com",
   messagingSenderId: "769667354557",

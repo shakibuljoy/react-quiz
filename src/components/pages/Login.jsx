@@ -6,7 +6,7 @@ import loginimg from "../../assets/images/login.svg";
 import TextInput from "../formElement/TextInput";
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,39 +29,42 @@ export default function Login() {
       setLoading(false);
     }
   }
-  if (currentUser) {
-    return navigate("/");
+  if (!currentUser){
+    return (
+      <>
+        <h1>Login to your account</h1>
+        <div className="column">
+          <Illustration img={loginimg} />
+          <Form className={classes.login} onSubmit={handleSubmit}>
+            <TextInput
+              type="text"
+              placeholder="Enter Email"
+              icon="alternate_email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <TextInput
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              placeholder="Enter Password"
+              icon="lock"
+            />
+  
+            <Button disabled={loading} type="submit">
+              {loading ? "Loading..." : <span>Submit Now</span>}
+            </Button>
+            {error.length > 2 && <p className="error">{error}</p>}
+            <div className="info">
+              Don't have an account? <Link to="signup">Signup</Link> instead.
+            </div>
+          </Form>
+        </div>
+      </>
+    );
   }
-  return (
-    <>
-      <h1>Login to your account</h1>
-      <div className="column">
-        <Illustration img={loginimg} />
-        <Form className={classes.login} onSubmit={handleSubmit}>
-          <TextInput
-            type="text"
-            placeholder="Enter Email"
-            icon="alternate_email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <TextInput
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-            placeholder="Enter Password"
-            icon="lock"
-          />
-
-          <Button disabled={loading} type="submit">
-            {loading ? "Loading..." : <span>Submit Now</span>}
-          </Button>
-          {error.length > 2 && <p className="error">{error}</p>}
-          <div className="info">
-            Don't have an account? <Link to="signup">Signup</Link> instead.
-          </div>
-        </Form>
-      </div>
-    </>
-  );
+  return(
+    <Navigate to="/" />
+  )
+  
 }

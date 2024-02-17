@@ -9,6 +9,8 @@ import TextInput from "../formElement/TextInput";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 export default function Signup() {
+  const { signup } = useAuth();
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,10 +18,6 @@ export default function Signup() {
   const [agree, setAgree] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const navigate = useNavigate();
-
-  const { signup } = useAuth();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -79,7 +77,7 @@ export default function Signup() {
           <Button disabled={loading} type="submit">
             <span>Submit Now</span>
           </Button>
-          {error.length > 1 &&<p className="error">{error}</p>}
+          {error.length > 1 && <p className="error">{error}</p>}
           <div className="info">
             Already have an account? <a href="login.html">Login</a> instead.
           </div>
